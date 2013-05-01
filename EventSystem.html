@@ -1,0 +1,40 @@
+<html>
+<body>
+<script>
+
+// var hubHardCoded = {
+// 	'storage': [],
+// 	onShout: function(callback){
+// 		hub.storage.push(callback);
+// 	},
+// 	shout: function(){
+// 		for(var i = 0; i < hub.storage.length; i++){
+// 			hub.storage[i]();
+// 		}
+// 	}
+// }
+// hub.onShout(function(){
+// 	console.log('just heard something shout!');
+// });
+
+var HubDynamic = function(eventName){
+
+	var hubDynamic = {};
+	hubDynamic[eventName] = {};
+	hubDynamic[eventName].storage = [];
+	hubDynamic[eventName].shouter = function(){
+		for(var i = 0; i < hubDynamic.eventNameStorage.length; i++){
+			hubDynamic.eventName.storage[i]();
+		}
+	}
+	hubDynamic[eventName].onShout = function(callback){
+		hubDynamic.eventName.storage.push(callback);
+	}
+	return hubDynamic;
+}
+
+....
+
+</script>
+</body>
+</html>

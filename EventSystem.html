@@ -23,17 +23,20 @@ var HubDynamic = function(eventName){
 	hubDynamic[eventName] = {};
 	hubDynamic[eventName].storage = [];
 	hubDynamic[eventName].shouter = function(){
-		for(var i = 0; i < hubDynamic.eventNameStorage.length; i++){
+		for(var i = 0; i < hubDynamic[eventName].length; i++){
 			hubDynamic.eventName.storage[i]();
 		}
 	}
 	hubDynamic[eventName].onShout = function(callback){
-		hubDynamic.eventName.storage.push(callback);
+		hubDynamic[eventName].storage.push(callback);
 	}
 	return hubDynamic;
 }
 
-....
+var hub = HubDynamic("trigger");
+debugger
+hub['trigger'].onShout(function(){conosole.log('hello!')});
+hub['trigger'].shouter();
 
 </script>
 </body>

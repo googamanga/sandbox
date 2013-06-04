@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Problem File</title>
+    <script src="../lib/underscore/underscore-min.js"></script>
+	<script>
+
+	// var myMemoize = function(func){
+ //    	output = {};
+ //    	return function(func){
+ //    		if(output[key]) return output[key];       how do i get keys from func!!??!?!
+	// 		func.call();
+ //    	}
+ //    }
+
+    var fib = _.memoize(function(n){
+    	if(n < 2) return n;
+    	return fib(n-1)+ fib(n-2);
+    });
+    for(var i = 0; i < 20; i++){
+    	console.log('n is:' + i + '   fib_n:' + fib(i));
+    }
+
+  </script>
+  </head>
+  <body>
+  </body>
+</html>

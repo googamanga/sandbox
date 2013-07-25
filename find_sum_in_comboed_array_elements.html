@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+
+    //Given an integer array, output all pairs that sum up to a specific value k. - See more at: http://www.ardendertat.com/2012/01/09/programming-interview-questions/#sthash.DOn3dqOY.dpuf
+
+    var array = [10,4,5,3,6,2,7,1,8,9];
+    // var array = [10,4,5,3,3,4,5,6,2,7,1,8,9];
+    var k = 10;
+
+    var counter;
+    var sortCounter;
+    var allPairsForKBruteForce = function(array, k){
+      counter = 0;
+      var results = [];
+      for(var i = 0; i < array.length - 1; i++){
+        for(var j = i + 1; j < array.length; j++){
+          counter += 1;
+          if(k === array[i] + array[j]){
+            results.push([array[i], array[j]]);
+          }
+        }
+      }
+      return results;
+    }
+
+    var allPairsForKFaster = function(array, k){
+      counter = 0;
+      sortCounter = 0;
+      var results =[];
+      var sortedArray = array.sort(function(a,b){
+        sortCounter += 1;
+        return a - b
+      });
+
+      var iFront = 0
+      var iBack = sortedArray.length - 1;
+
+      while(iBack - iFront > 0){
+        if(k === sortedArray[iFront] + sortedArray[iBack]){
+          results.push([sortedArray[iFront], sortedArray[iBack]]);
+          iFront += 1;
+          iBack -= 1;
+        } else if(k > iBack){
+          iBack -= 1;
+        } else if(k < iFront){
+          iFront += 1;
+        }
+        counter += 1;
+      }
+      return results;
+    }
+
+    var results = allPairsForKBruteForce(array, k);
+    for(var i = 0; i < results.length; i++){
+      console.log(results[i]);
+    }
+    console.log('counter: ', counter);
+
+    console.log('assuming the input nums are unique')
+    var results = allPairsForKFaster(array, k);
+    for(var i = 0; i < results.length; i++){
+      console.log(results[i]);
+    }
+    console.log('counter: ', counter);
+    console.log('sortCounter: ', sortCounter);
+
+    </script>
+  </head>
+</html>

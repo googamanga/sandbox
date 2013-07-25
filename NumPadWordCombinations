@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+
+    var phoneLetters = function(number){
+      var result =[];
+      var values = [null, null, ["a","b","c"],["d","e","f"]];
+      var strNum = number.toString();
+
+      (function recurse(prefix, remain){
+        if(prefix.length === strNum.length){
+          return result.push(prefix);
+        }
+        for(var i = 0; i < 3; i++){
+          recurse( prefix + values[remain[0]][i], remain.substr(1));
+        }
+      })("", strNum);
+      return result;
+    }
+    console.log('phoneLetter: ', phoneLetters("323"));
+
+    </script>
+  </head>
+</html>

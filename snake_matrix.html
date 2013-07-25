@@ -1,0 +1,65 @@
+<script>
+var matrix =[
+[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9]
+];
+
+longestPath(matrix);
+
+function longestPath(matrix){
+  var results = [];
+  var size = matrix.length;
+  for(var i = 0; i < size; i++){
+    for(var j = 0; j < size; j++){
+      var visited = {};
+      visited[i + "-" + j] = true;
+      (function recurse(path, visited){
+        var choices = filterChoices(matrix, path, visited);  //choices [[i,j],[i,j],...]
+        if(choices.length === 0){
+          debugger
+          var string = ""
+          for(var i = 0; i < path.length; i++){
+            string += matrix[path[i][0]][path[i][1]];
+          }
+          console.log(string);
+          results.push(string);
+
+        } else {
+          for(var i = 0; i < choices.length; i++){
+            var currentKey = [choices[i][0] + "-" + choices[i][1]];
+            visited[currentKey] = true;
+            path.push([choices[i][0],choices[i][1]]);
+            recurse(path, visited);
+            path.pop();
+            delete visited[currentKey];
+          }
+        }
+      })([[i,j]],visited);  //path [[i,j],[i,j],...], visited {["i-j"]}
+    }
+  }
+  return results;
+}
+
+
+
+function filterChoices(matrix, path, visited){
+  var choices = [];
+  var size = matrix.length;
+  var i = path[path.length-1][0];
+  var j = path[path.length-1][1];
+
+  if(i - 1 >= 0 && !visited[(i - 1) + "-" + j] && matrix[i-1][j] >= matrix[i][j]) { choices.push([i - 1 ,j]) }  //left
+  if(i + 1 < size && !visited[(i + 1) + "-" + j] && matrix[i+1][j] >= matrix[i][j]) { choices.push([i + 1 ,j]) }  //right
+  if(j - 1 >= 0 && !visited[i + "-" + (j - 1)] && matrix[i][j-1] >= matrix[i][j]) { choices.push([i,j - 1]) }  //top
+  if(j + 1 < size && !visited[i + "-" + (j + 1)] & matrix[i][j+1] >= matrix[i][j]) { choices.push([i,j + 1]) }  //bottom
+
+  if(j - 1 >= 0 && i + 1 < size && !visited[(i + 1) + "-" + (j - 1)] && matrix[i+1][j-1] >= matrix[i][j]) { choices.push([i + 1,j - 1]) }  //top right
+  if(j - 1 >= 0 && i - 1 >= 0 && !visited[(i - 1) + "-" + (j - 1)] && matrix[i-1][j-1] >= matrix[i][j]) { choices.push([i - 1,j - 1]) }  //top left
+  if(j + 1 < size && i + 1 < size && !visited[(i + 1) + "-" + (j + 1)] && matrix[i+1][j+1] >= matrix[i][j]) { choices.push([i + 1,j + 1]) }  //bottom right
+  if(j + 1 < size && i - 1 >= 0 && !visited[(i - 1) + "-" + (j + 1)] && matrix[i-1][j+1] >= matrix[i][j]) { choices.push([i - 1,j + 1]) }  //bottom left
+
+  return choices;
+}
+
+</script>

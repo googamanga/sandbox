@@ -1,46 +1,36 @@
 <html>
+<style>
+  .outer{
+    width: 700px;
+    border: 2px solid;
+    background-color: blue;
+  }
+  .inner{
+    text-align: center;
+    border-radius: 50px;
+    line-height:176px;
+    padding: 10px;
+    height: 200px;
+    width: 200px;
+    border: 2px solid;
+    font-size: 20px;
+    box-sizing:border-box;
+    float:left;
+    background-color: red;
+  }
+  .after{
+    clear:both;
+    width: 200px;
+    border: 2px solid;
+    background-color: green;
+  }
+
+</style>
 <body>
-<script>
-// Make an array method that can return whether or not a context array is a
-// subset of an input array.  To simplify the problem, you can assume that both
-// arrays will contain only strings.
-//
-// See http://en.wikipedia.org/wiki/Subset for more on the definition of a
-// subset.
-//
-// Extra credit: Make the method work for arrays that contain any value,
-// including non-strings.
-
-Array.prototype.isSubsetOf = function(array){
-  // Your code here
-  var storage = {};
-  for(var i= 0; i < array.length; i++){
-    storage[JSON.stringify(array[i])] = 1;
-  }
-  debugger
-  for(var j = 0; j < this.length; j++){
-    if(storage[JSON.stringify(this[j])] === undefined){
-      return false;
-    }
-  }
-  return true;
-};
-
-var a = [2,3,1];
-var b = [3,2];
-var c = [1,5];
-var d = [1,2,3,4,5];
-
-var aObj1 = [{abc: 'def'},{ghi: 'jkl'}, {mno: 'pqr'}];
-var aObj2 = [{ghi: 'jkl'}, {mno: 'pqr'}];
-
-console.log(b.isSubsetOf(a)); //true
-console.log(c.isSubsetOf(a)); //false
-console.log(a.isSubsetOf(d)); //true
-
-console.log(aObj2.isSubsetOf(aObj1)); //true
-console.log(aObj1.isSubsetOf(aObj2)); //false
-
-</script>
+  <div class="outer">
+    <div class="inner">inner, blah blah blah</div>
+    <div class="inner">inner</div>
+  </div>
+  <div class="after">after</div>
 </body>
 </html>

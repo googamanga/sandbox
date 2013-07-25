@@ -1,0 +1,23 @@
+<html>
+<style>
+
+</style>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<body>
+<script>
+var nums = [1, 6, 190, 5, 22, 84, 13, 73,99, 82, 64, 31, 32, 33, 58,49 ];
+nums.sort(function(a,b) {
+  if(a >b){
+    return -1;
+  } else if (a < b) {
+    return 1;
+  } else {
+    return 0;
+  }
+});
+document.write(nums);
+
+</script>
+</body>
+</html>
